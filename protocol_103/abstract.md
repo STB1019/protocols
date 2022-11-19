@@ -1,3 +1,4 @@
-Questo documento viene redatto come dimostrazione delle operazioni descritte da questa repository.
+**Casi d’uso**
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis nulla orci, in venenatis magna lacinia eu. Integer pharetra urna non turpis ultrices interdum. Vestibulum ipsum erat, tincidunt et lobortis sit amet, malesuada sed quam. In finibus vestibulum pulvinar. Maecenas accumsan quis elit eget viverra.
+- Proposta di un nuovo progetto da parte di un membro dello Student Branch
+- Proposta di un nuovo progetto da parte di un ente esterno allo Student Branch

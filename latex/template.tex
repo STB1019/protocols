@@ -1,0 +1,119 @@
+\ifdefined\modedraft%
+  \documentclass[12pt, draft]{article}
+  \usepackage{draftwatermark}
+\else
+  \documentclass[12pt]{article}
+\fi
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage[a4paper, total={186mm, 255mm}, includeheadfoot]{geometry}
+\usepackage[hashEnumerators, hybrid, fencedCode]{markdown}
+\usepackage{setspace}
+\usepackage{xcolor}
+
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage[unicode=true, 
+bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=1,
+breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]{hyperref}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{lastpage}
+
+\defaultfontfeatures{Ligatures=TeX}
+\hypersetup{hidelinks}
+
+\makeatletter
+
+    \input{../latex/definitions.tex}
+    \input{../latex/utils.tex}
+
+    \renewcommand{\maketitle}{%
+      \renewcommand{\makeheader}{}
+      \renewcommand{\makefooter}{
+        \fancyfoot[LE,RO]{\vspace*{3mm}Prima pubblicazione: \@publishdate\hspace{1.5mm}|\hspace{1.5mm}\thepage\hspace{3mm}(\pageref{LastPage})}
+      }
+      
+      \begin{minipage}{.9\textwidth}
+        \fontfamily{lmss}
+        \begin{minipage}{.3\textwidth}
+          \includegraphics[width=.7\textwidth]{../latex/logo.png}
+        \end{minipage}
+        \begin{minipage}{.74\textwidth}
+          \begin{flushright}
+            {\itshape\@date}
+
+            \vspace{5mm}
+            \textbf{IEEE Student Branch STB1019}\\
+            Università degli studi di brescia
+            
+            \vspace{3mm}
+            Counselor: Depari Alessandro\\\href{mailto:alessandro.depari@unibs.it}{alessandro.depari@unibs.it}
+            
+          \end{flushright}
+        \end{minipage}
+      \end{minipage}
+    }
+
+    \newcommand{\makefooter}{
+      \fancyfoot[LO,RE]{\vspace*{-5mm}\includegraphics[width=20mm]{../latex/logo.png}}
+      \fancyfoot[LE,RO]{\vspace*{3mm}Prima pubblicazione: \@publishdate\hspace{1.5mm}|\hspace{1.5mm}\thepage\hspace{3mm}(\pageref{LastPage})}
+    }
+    \newcommand{\makeheadertitle}{
+      \textbf{IEEE SB1019}
+    }
+    \newcommand{\makeheader}{
+      \fancyhead[LO,RE]{\makeheadertitle}
+      \fancyhead[LE,RO]{\textbf{Prototcollo \@protocolnumber}}
+    }
+
+    \newcommand{\makeending}{
+      \vspace*{10mm}
+
+      \begin{flushright}\itshape%
+        I membri dell'esecutivo approvano all'unanimità
+        \vspace*{5mm}
+
+        \@chair, Chair\\
+        \@vicechair, Vice Chair\\
+        \@secretary, Secretary\\
+        \@treasurer, Treasurer\\
+        \@webmaster, Webmaster\/
+      \end{flushright}
+      \vfill
+      \begin{center}
+        \itshape\footnotesize
+        Per questioni relative al documento corrente è possibile contattare i membri dell'esecutivo tramite posta elettronica al sito \href{mailto:stb1019\_executive@googlegroups.com}{stb1019\_executive@googlegroups.com}\/
+      \end{center}
+      \clearpage
+    }
+
+    \AtBeginDocument{\renewcommand{\abstractname}{\@title}}
+
+\makeatother%
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\normalfont\bfseries}
+\titleformat*{\paragraph}{\footnotesize\bfseries}
+
+
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\renewcommand\thesubsubsection{\thesubsection.\alph{subsubsection}}
+
+
+\onehalfspacing%
+
+
+\fancypagestyle{fancy}{%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyhf{}%
+  \makeheader%
+  \makefooter%
+}
+
+\pagestyle{fancy}

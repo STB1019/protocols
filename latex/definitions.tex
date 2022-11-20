@@ -1,0 +1,14 @@
+\newcommand*{\publishdate}[1]{\gdef\@publishdate{#1}}
+\newcommand*{\@publishdate}{\@date}
+\newcommand*{\chair}[1]{\gdef\@chair{#1}}
+\newcommand*{\@chair}{\PackageError{protocol_definition}{chair not defined}{}}
+\newcommand*{\vicechair}[1]{\gdef\@vicechair{#1}}
+\newcommand*{\@vicechair}{\PackageError{protocol_definition}{vicechair not defined}{}}
+\newcommand*{\secretary}[1]{\gdef\@secretary{#1}}
+\newcommand*{\@secretary}{\PackageError{protocol_definition}{secretary not defined}{}}
+\newcommand*{\treasurer}[1]{\gdef\@treasurer{#1}}
+\newcommand*{\@treasurer}{\PackageError{protocol_definition}{treasurer not defined}{}}
+\newcommand*{\webmaster}[1]{\gdef\@webmaster{#1}}
+\newcommand*{\@webmaster}{\PackageError{protocol_definition}{webmaster not defined}{}}
+\newcommand*{\protocolnumber}[1]{\gdef\@protocolnumber{#1}}
+\newcommand*{\@protocolnumber}{\PackageError{protocol_definition}{protocolnumber not defined}{}}

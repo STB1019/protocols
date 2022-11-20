@@ -1,0 +1,18 @@
+\begin{document}
+   
+    \maketitle\\\thispagestyle{fancy}
+
+    \IfFileExists{abstract.md}{
+        \abstract{
+            \hfill
+            \begin{minipage}{.8\textwidth}
+                \markdownInput{abstract.md}
+            \end{minipage}    
+            \hfill
+        }
+    }
+    
+    \inputAllFiles{content}
+    \makeending%
+    \inputAllFiles{edits}
+\end{document}

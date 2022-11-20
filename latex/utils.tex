@@ -1,0 +1,8 @@
+\def\inputAllFiles#1{%
+    \immediate\write18{ls #1/*.md | xargs -I {} cat "{}" >> __tmp.md}%
+    \IfFileExists{__tmp.md}{
+        \markdownInput{__tmp.md}
+    }
+    \AtEndDocument{\immediate\write18{rm -f __tmp.md}}
+}
+

@@ -1,0 +1,90 @@
+name: Compila il documento
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+    branches:
+      - master
+    
+
+jobs:
+  compile-doc:
+    runs-on: ubuntu-latest
+    if: github.event.action != 'closed' || github.event.pull_request.merged == true
+    steps:
+      - name: Check if the branch is a proposal
+        id: isproposal
+        run: echo "ISPROPOSAL=$([[ $(dirname $GITHUB_HEAD_REF) == "proposal" ]] && echo -n "true" || echo -n "false")" >> $GITHUB_OUTPUT
+
+      - name: Get mode flag
+        if: ${{ steps.isproposal.outputs.ISPROPOSAL == 'true'}}
+        id: mode
+        run: echo "MODE=$([[ "${{ github.event.pull_request.merged }}" == "true" ]] && echo -n "release" || echo -n "draft")" >> $GITHUB_OUTPUT
+
+      - name: Error if not proposal and close
+        if: ${{ steps.isproposal.outputs.ISPROPOSAL == 'false'}}
+        uses: superbrothers/close-pull-request@v3
+        with:
+          comment: "Questa richiesta proviene da un branch che non rispetta il naming scheme. Il branch sorgente deve essere chiamato `proposal/<protocol_number>`"
+
+      - name: Get protocol number
+        id: protonum
+        if: ${{ steps.isproposal.outputs.ISPROPOSAL == 'true'}}
+        run: echo "PROTONUM=$(basename $GITHUB_HEAD_REF)" >> $GITHUB_OUTPUT
+
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        if: ${{ steps.isproposal.outputs.ISPROPOSAL == 'true'}}
+
+      - name: Compile latex document
+        uses: xu-cheng/texlive-action/small@v1
+        if: ${{ steps.isproposal.outputs.ISPROPOSAL == 'true'}}
+        with:
+          run: |
+            apk add make
+            tlmgr install markdown titlesec lastpage paralist csvsimple gobble draftwatermark
+            texhash
+            make MODE=${{ steps.mode.outputs.MODE }} protocol_${{ steps.protonum.outputs.PROTONUM }}
+      
+      - name: Save compiled document
+        if: ${{ steps.isproposal.outputs.ISPROPOSAL == 'true' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: protocol
+          path: |
+            out/protocol_${{ steps.protonum.outputs.PROTONUM }}.pdf
+            protocol_${{ steps.protonum.outputs.PROTONUM }}/abstract.md
+      
+      - name: Save logs
+        if: ${{ steps.isproposal.outputs.ISPROPOSAL == 'true' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: log
+          path: texout/*.log
+
+  release-doc:
+    runs-on: ubuntu-latest
+    needs: compile-doc
+    if: github.event.pull_request.merged == true
+    steps:
+
+      - name: Get protocol number
+        id: protonum
+        run: echo "PROTONUM=$(basename $GITHUB_HEAD_REF)" >> $GITHUB_OUTPUT
+
+      - name: Download the release document
+        uses: actions/download-artifact@v3
+        with:
+          name: protocol
+      
+      - name: Release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: out/protocol_${{ steps.protonum.outputs.PROTONUM }}.pdf
+          bodyFile: protocol_${{ steps.protonum.outputs.PROTONUM }}/abstract.md 
+          name: 'Protocol ${{ steps.protonum.outputs.PROTONUM }}'
+          tag: PROT.${{ steps.protonum.outputs.PROTONUM }}

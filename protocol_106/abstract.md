@@ -1,0 +1,1 @@
+Il presente documento è finalizzato alla regolamentazione della gestione delle attrezzature e del materiale.

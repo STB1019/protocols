@@ -1,5 +1,4 @@
-# Modifica del 3 Novembre 2022
-## Tabelle Possessore Tessera - Data acquisizione - Firma
+# Allegato A - Tabelle Possessore Tessera - Data acquisizione - Firma
 
 ### Tessera N° 2452
 \begin{center}
@@ -115,4 +114,4 @@
 \end{tabular}
 \end{center}
 
-\makeending
+\clearpage

@@ -1,1 +1,1 @@
-\includepdf[page=-]{original.pdf}
+\includepdf[pages=-]{original.pdf}

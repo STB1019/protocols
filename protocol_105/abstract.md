@@ -1,0 +1,1 @@
+Il presente documento è finalizzato alla regolamentazione del passaggio delle consegne dall'esecutivo uscente a quello entrante

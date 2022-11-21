@@ -1,0 +1,1 @@
+Il presente protocollo è finalizzato alla regolamentazione della distribuzione delle tessere di accesso alla Sala Associazioni.

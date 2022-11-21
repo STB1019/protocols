@@ -1,5 +1,5 @@
 \def\inputAllFiles#1{%
-    \immediate\write18{ls #1/*.md | xargs -I {} cat "{}" >> __tmp.md}%
+    \immediate\write18{ls #1/*.md | (xargs -I {} cat "{}"; echo) >> __tmp.md}%
     \IfFileExists{__tmp.md}{
         \markdownInput{__tmp.md}
     }

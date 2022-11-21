@@ -5,7 +5,7 @@ IEEE SB1019 Executive Protocols
 
 1. `git checkout model`
 2. `git checkout -b proposal/<protocol_number>`
-3. `mv -rv protocol_template protocol_<protocol_number>`
+3. `mv -v protocol_template protocol_<protocol_number>`
 4. Scrivilo!
     - Ogni protocollo deve essere salvato in una directory nominata `protocollo_<numero>`
     - Ogni branch `proposal/<protocol_number>` deve contenere un solo protocollo in una sola directory dedicata
@@ -17,7 +17,7 @@ IEEE SB1019 Executive Protocols
             - `edits/`: Questa directory contiene una lista di modifiche apportate al documento. Ogni documento dovrà riportare come titolo la dicitura `Modifica del <data>` e come sottotitolo il titolo della modifica. Inoltre dovrà essere terminato con la dicitura `\makeending`.
 
 5. `git add ./protocol_<protocol_number>`
-6. `git commit -a -m -S "<commit message>"`
+6. `git commit -a -m "<commit message>"`
 7. `git push origin proposal/<numero>`
 8. Una volta caricato il contenuto, andare su github e creare una pull request dal branch appena creato verso master.
     - Una volta che tutti i restanti membri dell'executive hanno approvato il documento sarà possibile mergiare e rilasciare il protocollo
@@ -26,3 +26,7 @@ IEEE SB1019 Executive Protocols
 ## Note
 
 È possibile usare codice latex nei documenti markdown.
+
+## Modifiche al modello
+
+In caso di modifiche al modello, un nuovo branch chiamato `model_change/<YYYYMMGG>` deve essere creato e una PR deve essere proposta.

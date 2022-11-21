@@ -14,7 +14,7 @@ IEEE SB1019 Executive Protocols
             - `abstract.md`: File markdown contenente una breve descrizione del documento e dei suoi obiettivi. Evitare sezioni e titoli. Non è possibile omettere questo file
             - `protocol.tex`: File contenente la descrizione dell'executive e dei dati del protocollo. Sostituire i valori tra parentesi graffe.
             - `content/`: Questa directory contiene vari documenti `*.md` che verranno riportati nel corpo del documento concatenandoli in ordine alfabetico. Una volta terminati, il documento sarà concluso con lo spazio delle firme automaticamente.
-            - `edits/`: Questa directory contiene una lista di modifiche apportate al documento. Ogni documento dovrà riporatre come titolo la dicitura `Modifica del <data>` e come sottotitolo il titolo della modifica. Inoltre dovrà essere terminato con la dicitura `\makeending`.
+            - `edits/`: Questa directory contiene una lista di modifiche apportate al documento. Ogni documento dovrà riportare come titolo la dicitura `Modifica del <data>` e come sottotitolo il titolo della modifica. Inoltre dovrà essere terminato con la dicitura `\makeending`.
 
 5. `git add ./protocol_<protocol_number>`
 6. `git commit -a -m -S "<commit message>"`

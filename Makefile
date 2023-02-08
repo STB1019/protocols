@@ -1,8 +1,8 @@
 MODE := draft
 
-protocol_*:
+letter_*:
 	@echo "compiling $@"
-	echo '\def\mode$(MODE){1}\input{protocol.tex}' > $@/__tmp.tex
+	echo '\def\mode$(MODE){1}\input{letter.tex}' > $@/__tmp.tex
 	cd $@ && latexmk -synctex=1 -interaction=nonstopmode -file-line-error -lualatex -outdir=../texout/ -jobname=$@ -shell-escape __tmp.tex
 	rm -rf ./**/__tmp.tex || exit 0
 	[ ! -d out ] && mkdir -p out || exit 0
@@ -16,6 +16,6 @@ clean:
 cleanall: clean
 	rm -rf out
 
-all: clean protocol_*
+all: clean letter_*
 
-.PHONY: all clean cleanall protocol_*
+.PHONY: all clean cleanall letter_*

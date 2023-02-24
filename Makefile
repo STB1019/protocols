@@ -8,6 +8,13 @@ protocol_*:
 	[ ! -d out ] && mkdir -p out || exit 0
 	[ -f texout/$@.pdf ] && mv texout/$@.pdf "out/$@.pdf"
 
+manifest_*:
+	@echo "compiling $@"
+	cd $@ && latexmk -synctex=1 -interaction=nonstopmode -file-line-error -lualatex -outdir=../texout/ -jobname=$@ -shell-escape manifest.tex
+	rm -rf ./**/__tmp.tex || exit 0
+	[ ! -d out ] && mkdir -p out || exit 0
+	[ -f texout/$@.pdf ] && mv texout/$@.pdf "out/$@.pdf"
+
 clean:
 	rm -rf texout || exit 0
 	rm -rf ./**/_markdown_protocol_*/ || exit 0
@@ -18,4 +25,4 @@ cleanall: clean
 
 all: clean protocol_*
 
-.PHONY: all clean cleanall protocol_*
+.PHONY: all clean cleanall protocol_* manifest_*
